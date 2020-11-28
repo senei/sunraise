@@ -6,7 +6,8 @@
     </Sidebar>
   </nav>
   <div class="ml-72 w-auto h-full">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <Channel :class="{ hidden: activeChannel == '' }" :active="this.activeChannel" />
+    <HelloWorld :class="{ hidden: activeChannel !== '' }" msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import { defineComponent } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import Sidebar from "./components/Sidebar.vue";
+import Channel from "./components/Channel.vue";
 
 import UserModel from "@/store/models/UserModel";
 import ChannelModel from "@/store/models/ChannelModel";
@@ -28,6 +30,7 @@ export default defineComponent({
   components: {
     HelloWorld,
     Sidebar,
+    Channel,
   },
   methods: {
     swichActive(key: string) {

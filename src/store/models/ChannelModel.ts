@@ -10,6 +10,6 @@ export default class ChannelModel {
         this.name = '';
         this.date = '0000-00-00';
         this.description = ' --- 255 --- ';
-        this.ovner = ' creator tag ';
+        this.ovner = '0000';
     }
 } 

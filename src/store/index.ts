@@ -3,6 +3,7 @@ import VuexPersist from 'vuex-persist'
 
 import userModel from './models/UserModel';
 import channelModel from './models/UserModel';
+import messageModel from './models/messageModel';
 
 const vuexPersist = new VuexPersist({
   key: 'sunraise',
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   state: {
     chanelActive: new String(),
     users: Array<userModel>(),
+    messages: Array<messageModel>(),
     channels: Array<channelModel>()
   },
 
@@ -39,6 +41,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    getMessages: (state) => (channelTag: string) => {
+      return state.messages.filter(message => message.channelTag === channelTag);
+    },
     getChannel: (state) => (tag: string) => {
       return state.channels.find(channel => channel.tag === tag);
     },
