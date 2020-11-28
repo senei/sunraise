@@ -12,11 +12,16 @@ const vuexPersist = new VuexPersist({
 export default new Vuex.Store({
   state: {
     newChanelName: "",
+    newChanelActive: true,
     users: Array<userModel>(),
     channels: Array<channelModel>()
   },
 
   mutations: {
+    inputDisplayChange(state) {
+      console.log(state.newChanelActive);
+      state.newChanelActive = !state.newChanelActive;
+    },
     addChannel(state, newChannel: channelModel) {
       state.channels.push(newChannel);
       state.newChanelName = "";
@@ -26,6 +31,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    inputDisplayChange(context) {
+      context.commit('inputDisplayChange');
+    },
     addChannel(context, newChannel: channelModel) {
       context.commit('addChannel', newChannel);
     },

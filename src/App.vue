@@ -1,10 +1,10 @@
 <template>
-<nav class="absolute top-1 bottom-1 left-1 w-72 border border-gray-200 bg-gray-300 grid grid-flow-row auto-rows-max">
-    <div class="border-b border-gray-200 p-4">
+<nav class="absolute top-1 bottom-1 left-1 w-72 border border-gray-200 bg-gray-300 overflow-hidden">
+    <div class="border-b border-gray-200 p-4 h-20">
         <h3 class="text-lg text-bold">Sunraise inc.</h3>
         <h4 class="text-normal">John doe</h4>
     </div>
-    <div class=" p-4">
+    <div class="m-4 mr-0 absolute top-20 bottom-0 left-0 -right-4 pr-8 overflow-scroll">
         <ul>
             <li> 
                 Users 
@@ -13,11 +13,13 @@
                 </ul>
             </li>
             <li class="mt-2"> 
-                Channels <button style="line-height: 0;" class="w-6 h-6 float-right border-2 border-gray-light border-double rounded-full">+</button>
+                Channels 
+                <button style="line-height: 0;" class="w-6 h-6 float-right border-2 border-gray-light border-double rounded-full" @click="chengeInputDisplay">+</button>
+                <div class="m-1" :class="{ 'hidden': this.$store.state.newChanelActive }">
+                    <input class="w-full bg-gray-400 text-white p-1" v-model='this.$store.state.newChanelName' placeholder=" add new channel " type="text" @keyup.enter="submitName"/>
+                </div>
                 <ul class="ml-2 overflow-hidden ">
-                    <li class="_hidden">
-                        <input v-model='this.$store.state.newChanelName' type="text" @keyup.enter="submitName"/>
-                    </li>
+                    
                     <li v-for="channel in this.$store.state.channels" :key="channel.tag"># {{channel.name}}</li>
                 </ul>
             </li>
@@ -41,6 +43,9 @@ export default defineComponent({
         HelloWorld
     },
     methods: {
+        chengeInputDisplay() {
+            this.$store.commit('inputDisplayChange');
+        },
         submitName(){
             const channel = new ChannelModel();
             channel.name = this.$store.state.newChanelName;
@@ -67,7 +72,6 @@ export default defineComponent({
             channel.tag = ("0000"+id).substring(-4);
             this.$store.commit('addChannel', channel);
         });
-        console.log()
     }
 });
 </script>
