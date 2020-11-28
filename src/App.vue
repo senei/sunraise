@@ -14,7 +14,10 @@
             </li>
             <li class="mt-2"> 
                 Channels <button style="line-height: 0;" class="w-6 h-6 float-right border-2 border-gray-light border-double rounded-full">+</button>
-                <ul class="ml-2">
+                <ul class="ml-2 overflow-hidden ">
+                    <li class="_hidden">
+                        <input v-model='this.$store.state.newChanelName' type="text" @keyup.enter="submitName"/>
+                    </li>
                     <li v-for="channel in this.$store.state.channels" :key="channel.tag"># {{channel.name}}</li>
                 </ul>
             </li>
@@ -37,9 +40,13 @@ export default defineComponent({
     components: {
         HelloWorld
     },
-    
-    computed: {
-        userList(){ return this.$store.getters.getChannelByName();}
+    methods: {
+        submitName(){
+            const channel = new ChannelModel();
+            channel.name = this.$store.state.newChanelName;
+            channel.tag = ("0000"+this.$store.state.channels.length).substring(-4);
+            this.$store.commit('addChannel', channel);
+        }
     },
     mounted() {
         ['Lisa', 'Zoe', 'Harry', 'Lee'].filter((name)=>{

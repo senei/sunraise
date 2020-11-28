@@ -11,6 +11,7 @@ const vuexPersist = new VuexPersist({
 
 export default new Vuex.Store({
   state: {
+    newChanelName: "",
     users: Array<userModel>(),
     channels: Array<channelModel>()
   },
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   mutations: {
     addChannel(state, newChannel: channelModel) {
       state.channels.push(newChannel);
+      state.newChanelName = "";
     },
     addUser(state, newUser: userModel) {
       state.users.push(newUser);
