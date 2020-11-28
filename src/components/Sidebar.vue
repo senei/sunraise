@@ -1,5 +1,7 @@
 <template>
-  <div class="border-b border-gray-200 p-4 h-20"><slot></slot></div>
+  <div class="border-b border-gray-200 p-4 h-20">
+    <slot></slot>
+  </div>
   <div class="m-4 mr-0 absolute top-20 bottom-0 left-0 -right-4 pr-8 overflow-scroll">
     <ul>
       <li>
@@ -15,7 +17,7 @@
           <input class="w-full bg-gray-400 text-white p-1" v-model="this.inputValue" placeholder=" add new channel " type="text" @keyup.enter="submitName" />
         </div>
         <ul class="ml-2 overflow-hidden">
-          <li v-for="channel in this.channels" :key="channel.tag" @click="swichActive(channel.tag)" :class="{ active: channel.tag == this.active }"># {{ channel.name }}</li>
+          <li class="cursor-pointer" v-for="channel in this.channels" :key="channel.tag" @click="swichActive(channel.tag)" :class="{ 'font-semibold': channel.tag == this.lineActive }"># {{ channel.name }}</li>
         </ul>
       </li>
     </ul>
@@ -23,23 +25,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, $emit } from "vue";
+import { defineComponent } from "vue";
 import ChannelModel from "@/store/models/ChannelModel";
 
 export default defineComponent({
   name: "Sidebar",
-  emits: ["update:active"],
   data() {
     return {
-      active: "",
+      lineActive: "",
       inputValue: "",
       inputActive: false,
     };
   },
   methods: {
     swichActive(key) {
-      console.log(key);
-      this.active = key;
+      this.$store.commit("chengeActive", key);
+      this.lineActive = key;
       // $emit("update:active", key);
     },
     chengeInputDisplay() {
@@ -49,11 +50,13 @@ export default defineComponent({
     submitName() {
       const channel = new ChannelModel();
       channel.name = this.$data.inputValue;
-      channel.tag = ("0000" + this.$props.channelsLength).substring(-4);
+      const newId = "0000" + this.$props.channelsLength;
+      channel.tag = newId.substring(newId.length - 4, newId.length);
       this.$store.commit("addChannel", channel);
     },
   },
   props: {
+    active: String,
     users: Array,
     channels: Array,
   },

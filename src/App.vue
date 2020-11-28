@@ -1,6 +1,6 @@
 <template>
   <nav class="fixed top-1 bottom-1 left-1 w-72 border border-gray-200 bg-gray-300 overflow-hidden">
-    <Sidebar :users="this.$store.state.users" :channels="this.$store.state.channels" v-model:active="this.activeChannel">
+    <Sidebar :users="this.$store.state.users" :channels="this.$store.state.channels" :active="this.$store.state.activeChannel">
       <h3 class="text-lg text-bold">Sunraise inc.</h3>
       <h4 class="text-normal">John doe</h4>
     </Sidebar>

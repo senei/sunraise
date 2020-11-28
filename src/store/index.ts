@@ -11,34 +11,31 @@ const vuexPersist = new VuexPersist({
 
 export default new Vuex.Store({
   state: {
-    newChanelName: "",
-    newChanelActive: true,
+    chanelActive: new String(),
     users: Array<userModel>(),
     channels: Array<channelModel>()
   },
 
   mutations: {
-    inputDisplayChange(state) {
-      console.log(state.newChanelActive);
-      state.newChanelActive = !state.newChanelActive;
-    },
     addChannel(state, newChannel: channelModel) {
       state.channels.push(newChannel);
-      state.newChanelName = "";
     },
     addUser(state, newUser: userModel) {
       state.users.push(newUser);
+    },
+    chengeActive(state, newActive: string) {
+      state.chanelActive = newActive;
     }
   },
   actions: {
-    inputDisplayChange(context) {
-      context.commit('inputDisplayChange');
-    },
     addChannel(context, newChannel: channelModel) {
       context.commit('addChannel', newChannel);
     },
     addUser(context, newUser: userModel) {
       context.commit('addUser', newUser);
+    },
+    chengeActive(context, newActive: string) {
+      context.commit('chengeActive', newActive);
     }
   },
   getters: {
