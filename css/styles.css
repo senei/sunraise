@@ -1,8 +1,8 @@
 
 section.message {
     max-width: 640px;
-    
 }
-/****sunraise components****/
 
-/********/
+.circle-x {
+    @apply font-semibold text-2xl h-8 w-8 text-center text-gray-200 border border-gray-300 cursor-pointer rounded-full;
+}
