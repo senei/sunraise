@@ -1,33 +1,34 @@
 <template>
-  <header class="w-full">
-    <!-- message header -->
-    {channel.name} {channel.description} {channel.ovner === '0000'?'cen delate':'only desplay'}
-  </header>
-  <main class="border-t border-b border-green-600 w-full">
-    <!-- message list -->
-  </main>
-  <footer class="w-full">
-    <!-- new message -->
-  </footer>
+  <section :class="this.class">
+    <header class="w-full">
+      <ChannelHeader :title="channel.name" :description="channel.description" :isDeleteble="channel.ovner === '0000'"> </ChannelHeader>
+    </header>
+    <main class="border-t border-b border-green-600 w-full">
+      <!-- message list -->
+    </main>
+    <footer class="w-full">
+      <!-- new message -->
+    </footer>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ChannelHeader from "./channel/ChannelHeader.vue";
 
 export default defineComponent({
   name: "Channel",
   data() {
     return {};
   },
-  computed(() => {
-    get: () => {
-      messages: this.$store.getMessages(this.channel.tag)
-    }
-  })
+  components: {
+    ChannelHeader,
+  },
   methods: {},
   props: {
     users: Array,
     channel: Object,
+    class: String,
   },
 });
 </script>

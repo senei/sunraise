@@ -12,7 +12,7 @@ const vuexPersist = new VuexPersist({
 
 export default new Vuex.Store({
   state: {
-    chanelActive: new String(),
+    chanelActive: "xxx",
     users: Array<userModel>(),
     messages: Array<messageModel>(),
     channels: Array<channelModel>()

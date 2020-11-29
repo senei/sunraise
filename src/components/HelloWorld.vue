@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" :class="this.class">
     <h1>{{ msg }}</h1>
     <h3>To do list</h3>
     <ul class="list-disc ml-5">
@@ -19,6 +19,7 @@ export default defineComponent({
   name: "HelloWorld",
   props: {
     msg: String,
+    class: String,
   },
 });
 </script>

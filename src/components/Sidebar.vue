@@ -37,22 +37,24 @@ export default defineComponent({
       inputActive: false,
     };
   },
+  emits: ["update:active"],
   methods: {
-    swichActive(key) {
-      this.$store.commit("chengeActive", key);
+    swichActive(key: string) {
+      // this.$store.commit("chengeActive", key);
       this.lineActive = key;
-      // $emit("update:active", key);
     },
     chengeInputDisplay() {
       // this.$store.commit("inputDisplayChange");
       this.inputActive = !this.inputActive;
     },
     submitName() {
-      const channel = new ChannelModel();
-      channel.name = this.$data.inputValue;
-      const newId = "0000" + this.$props.channelsLength;
-      channel.tag = newId.substring(newId.length - 4, newId.length);
-      this.$store.commit("addChannel", channel);
+      if (this.channels) {
+        const channel = new ChannelModel();
+        channel.name = this.$data.inputValue;
+        const newId = "0000" + this.channels.length;
+        channel.tag = newId.substring(newId.length - 4, newId.length);
+        this.$store.commit("addChannel", channel);
+      }
     },
   },
   props: {

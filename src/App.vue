@@ -1,12 +1,13 @@
 <template>
   <nav class="fixed top-1 bottom-1 left-1 w-72 border border-gray-200 bg-gray-300 overflow-hidden">
-    <Sidebar :users="this.$store.state.users" :channels="this.$store.state.channels" :active="this.$store.state.activeChannel">
+    <Sidebar :users="this.$store.state.users" :channels="this.$store.state.channels" v-model:active="activeChannel">
       <h3 class="text-lg text-bold">Sunraise inc.</h3>
       <h4 class="text-normal">John doe</h4>
     </Sidebar>
   </nav>
   <div class="ml-72 w-auto h-full">
-    <Channel :class="{ hidden: activeChannel == '' }" :active="this.activeChannel" />
+    {{ activeChannel }}
+    <Channel :class="{ hidden: activeChannel == '' }" :active="activeChannel" :channel="channel" />
     <HelloWorld :class="{ hidden: activeChannel !== '' }" msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
@@ -25,19 +26,20 @@ export default defineComponent({
   data() {
     return {
       activeChannel: "",
+      channel: {},
     };
+  },
+  watch: {
+    // channel: function (activeChannel) {
+    //   return this.$store.getters.getChannel(activeChannel);
+    // },
   },
   components: {
     HelloWorld,
     Sidebar,
     Channel,
   },
-  methods: {
-    swichActive(key: string) {
-      console.log(key);
-      // this.activeChannel = key;
-    },
-  },
+  methods: {},
   mounted() {
     ["Lisa", "Zoe", "Harry", "Lee"]
       .filter((name) => {
