@@ -40,11 +40,10 @@ export default defineComponent({
   emits: ["update:active"],
   methods: {
     swichActive(key: string) {
-      // this.$store.commit("chengeActive", key);
       this.lineActive = key;
+      this.$emit("update:active", key);
     },
     chengeInputDisplay() {
-      // this.$store.commit("inputDisplayChange");
       this.inputActive = !this.inputActive;
     },
     submitName() {

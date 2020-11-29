@@ -6,8 +6,7 @@
     </Sidebar>
   </nav>
   <div class="ml-72 w-auto h-full">
-    {{ activeChannel }}
-    <Channel :class="{ hidden: activeChannel == '' }" :active="activeChannel" :channel="channel" />
+    <Channel :class="{ hidden: activeChannel == '' }" :active="activeChannel" />
     <HelloWorld :class="{ hidden: activeChannel !== '' }" msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
@@ -28,11 +27,6 @@ export default defineComponent({
       activeChannel: "",
       channel: {},
     };
-  },
-  watch: {
-    // channel: function (activeChannel) {
-    //   return this.$store.getters.getChannel(activeChannel);
-    // },
   },
   components: {
     HelloWorld,
